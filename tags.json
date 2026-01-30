@@ -1,0 +1,157 @@
+[
+  {
+    "tag_id":1,
+    "tag_name":"Nov",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":2,
+    "tag_name":"Poledne",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":3,
+    "tag_name":"Půlnoc",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":4,
+    "tag_name":"Úplněk",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":5,
+    "tag_name":"Slunečný den",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":6,
+    "tag_name":"Po dešti",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":7,
+    "tag_name":"Po bouřích",
+    "tag_category":"Čas"
+  },
+  {
+    "tag_id":8,
+    "tag_name":"Břeh",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":9,
+    "tag_name":"Břeh řeky",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":10,
+    "tag_name":"Břidlicové skály",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":11,
+    "tag_name":"Doly",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":12,
+    "tag_name":"Exotické lesy",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":13,
+    "tag_name":"Hluboké lesy",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":14,
+    "tag_name":"Jeskyně",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":15,
+    "tag_name":"Močály",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":16,
+    "tag_name":"Ohnivá doupata",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":17,
+    "tag_name":"Prastaré hvozdy",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":18,
+    "tag_name":"Rumiště",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":19,
+    "tag_name":"Sněhové pláně",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":20,
+    "tag_name":"Solná pole",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":21,
+    "tag_name":"Staré chrámy",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":22,
+    "tag_name":"Rašeliniště",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":23,
+    "tag_name":"Stojatá voda",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":24,
+    "tag_name":"Koruny stoletých dubů",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":25,
+    "tag_name":"Bábelská jezera",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":26,
+    "tag_name":"Slunné vrcholy stolových hor (Mesikotánie)",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":27,
+    "tag_name":"Aktivní sopky",
+    "tag_category":"Speciální"
+  },
+  {
+    "tag_id":28,
+    "tag_name":"Bitevní pole",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":29,
+    "tag_name":"Hnůj",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":30,
+    "tag_name":"Popraviště",
+    "tag_category":"Prostředí"
+  },
+  {
+    "tag_id":31,
+    "tag_name":"Místo vícero úmrtí",
+    "tag_category":"Prostředí"
+  }
+]
