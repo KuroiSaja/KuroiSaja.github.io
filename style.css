@@ -36,18 +36,32 @@
    ========================= */
 
 .primary-btn {
-    margin-top: 1rem;
+    min-height: 64px;          /* 👈 hlavní změna – výška */
+    padding: 0 24px;           /* horizontální prostor */
+    font-size: 1.25rem;        /* větší text */
+    font-weight: 600;
+
+    border-radius: 14px;
     background: #2c3e50;
     color: #fff;
     border: none;
-    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .primary-btn:hover {
     background: #1f2d3a;
 }
+
+.primary-btn:active {
+    transform: translateY(2px);
+}
+
 
 /* =========================
    TAGS
