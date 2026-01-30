@@ -88,6 +88,16 @@
     border-radius: 6px;
 }
 
+.usage {
+    margin-top: 0.2rem;
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
+.result li {
+    margin-bottom: 0.6rem;
+}
+
 /* =========================
    RARITY COLORS
    ========================= */
