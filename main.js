@@ -309,6 +309,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const criticalFail = data.get("criticalFail") !== null;
         const selectedTags = getSelectedTags(form);
 
+        console.log("SELECTED TAG IDS:", selectedTags);
+
+
         const result = generate(
             INGREDIENTS,
             data.get("environment"),
