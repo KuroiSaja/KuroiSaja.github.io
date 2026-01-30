@@ -322,14 +322,5 @@ function generate(ingredients, environment, season, score, hours, critical, crit
 }
 
 
-//dočasný test
-const testPool = [
-    { name: "A", rarity: "common", "specific tag": "" },
-    { name: "B", rarity: "uncommon", "specific tag": "magic" },
-    { name: "C", rarity: "rare", "specific tag": "" }
-];
 
-console.log(
-    pickFromPool(testPool, 10, ["magic"])
-);
 
