@@ -206,6 +206,122 @@ function pickFromPool(pool, total, selectedTags) {
 }
 
 
+// =========================
+// GENERATION
+// =========================
+
+function generate(ingredients, environment, season, score, hours, critical, criticalFail, selectedTags) {
+
+    const result = {
+        inputs: {
+            environment,
+            season,
+            score,
+            hours,
+            critical,
+            criticalFail,
+            tags: selectedTags
+        },
+        raw: rawSuroviny(score, hours),
+        ingredients: {}
+    };
+
+    // ---- základní generace ----
+    const pool = buildPool(ingredients, environment, season, selectedTags);
+    const totalPicks = concretePerHour(score) * hours;
+    const picks = pickFromPool(pool, totalPicks, selectedTags);
+
+    for (const row of picks) {
+        const name = row.name;
+        if (!result.ingredients[name]) {
+            result.ingredients[name] = {
+                count: 0,
+                mana: safeInt(row.mana),
+                suroviny: safeInt(row.suroviny),
+                usage: row.usage,
+                rarity: row.rarity
+            };
+        }
+        result.ingredients[name].count++;
+    }
+
+    // ---- kritický úspěch ----
+    if (critical) {
+        const uncommon = ingredients.filter(r => r.rarity === "uncommon");
+        const rare = ingredients.filter(r => r.rarity === "rare");
+
+        const choices = [];
+        const weights = [];
+
+        // UNCOMMON
+        if (uncommon.length > 0) {
+            const r = uncommon[Math.floor(Math.random() * uncommon.length)];
+            choices.push({
+                name: r.name,
+                count: 1,
+                mana: safeInt(r.mana),
+                suroviny: safeInt(r.suroviny),
+                usage: r.usage,
+                rarity: r.rarity
+            });
+            weights.push(1.0);
+        }
+
+        // RARE (nižší váha)
+        if (rare.length > 0) {
+            const r = rare[Math.floor(Math.random() * rare.length)];
+            choices.push({
+                name: r.name,
+                count: 1,
+                mana: safeInt(r.mana),
+                suroviny: safeInt(r.suroviny),
+                usage: r.usage,
+                rarity: r.rarity
+            });
+            weights.push(0.25);
+        }
+
+        // ABSTRAKTNÍ MAGICKÝ NÁLEZ (MANA)
+        const manaMin = Math.max((score - 10) * 5, 5);
+        const manaMax = Math.max((score - 5) * 5, manaMin);
+
+        choices.push({
+            name: "Abstraktní magický nález",
+            count: null,
+            mana: randomInt(manaMin, manaMax),
+            usage: "Volně využitelná magická energie",
+            rarity: "abstract"
+        });
+        weights.push(1.0);
+
+        // ABSTRAKTNÍ NÁLEZ SUROVIN
+        const surovinyMin = Math.max((score - 10) * 10, 10);
+        const surovinyMax = Math.max((score - 5) * 10, surovinyMin);
+
+        choices.push({
+            name: "Abstraktní nález surovin",
+            count: null,
+            suroviny: randomInt(surovinyMin, surovinyMax),
+            usage: "Volně využitelné alchymistické suroviny",
+            rarity: "abstract"
+        });
+        weights.push(1.0);
+
+        result.rare = weightedRandom(choices, weights);
+    }
+
+    // ---- kritický neúspěch ----
+    if (criticalFail) {
+        result.raw = Math.floor(result.raw / 2);
+        for (const item of Object.values(result.ingredients)) {
+            item.count = Math.floor(item.count / 2);
+        }
+    }
+
+    return result;
+}
+
+
 //dočasný test
 const testPool = [
     { name: "A", rarity: "common", "specific tag": "" },
