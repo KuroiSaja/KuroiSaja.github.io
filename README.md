@@ -1,4 +1,4 @@
-# Generování surovin – přehled pro PJ
+# Generování surovin – přehled
 
 ## 1. Co se v okolí nachází
 
