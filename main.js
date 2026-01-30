@@ -31,6 +31,18 @@ async function loadTags() {
     }
 }
 
+function buildTagIdMap() {
+    const map = {};
+
+    for (const tags of Object.values(TAGS_BY_CATEGORY)) {
+        for (const tag of tags) {
+            map[tag.id] = tag.name;
+        }
+    }
+
+    return map;
+}
+
 function extractEnvironments(ingredients) {
     const set = new Set();
 
@@ -122,10 +134,17 @@ function renderResult(result) {
     el.appendChild(ctx);
 
     if (result.inputs.tags && result.inputs.tags.length > 0) {
+        const tagMap = buildTagIdMap();
+    
+        const tagNames = result.inputs.tags.map(
+            id => tagMap[id] ?? id
+        );
+    
         const tags = document.createElement("p");
-        tags.innerHTML = `<strong>Tagy:</strong> ${result.inputs.tags.join(", ")}`;
+        tags.innerHTML = `<strong>Tagy:</strong> ${tagNames.join(", ")}`;
         el.appendChild(tags);
     }
+
 
     /* =========================
        ZÁKLADNÍ SUROVINY
