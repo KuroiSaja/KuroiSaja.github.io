@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Generátor surovin – Dračí hlídka</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Generátor surovin</h1>
+
+<form id="generatorForm">
+
+    <label>Environment:
+        <select name="environment" required>
+            <option value="forest">Les</option>
+            <option value="meadow">Louka</option>
+            <option value="mountain">Hory</option>
+        </select>
+    </label>
+
+    <label>Roční období:
+        <select name="season" required>
+            <option value="jaro">Jaro</option>
+            <option value="léto">Léto</option>
+            <option value="podzim">Podzim</option>
+            <option value="zima">Zima</option>
+        </select>
+    </label>
+
+    <label>Score:
+        <input type="number" name="score" min="1" required>
+    </label>
+
+    <label>Hodiny:
+        <input type="number" name="hours" min="1" required>
+    </label>
+
+    <label>
+        <input type="checkbox" name="critical"> Kritický úspěch
+    </label>
+
+    <label>
+        <input type="checkbox" name="criticalFail"> Kritický neúspěch
+    </label>
+
+    <button type="submit">Generovat</button>
+</form>
+
+<div id="result"></div>
+
+<script src="generator.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
