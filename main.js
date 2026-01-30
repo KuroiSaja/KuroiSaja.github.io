@@ -273,12 +273,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const environments = extractEnvironments(INGREDIENTS);
     console.log("ENVIRONMENTS:", environments);
 
-    // volitelné: "libovolné"
-    const optAny = document.createElement("option");
-    optAny.value = "any";
-    optAny.textContent = "Libovolné";
-    envSelect.appendChild(optAny);
-
     for (const env of environments) {
         const opt = document.createElement("option");
         opt.value = env;
