@@ -224,27 +224,48 @@ function extractEnvironments(ingredients) {
 
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    // 1️⃣ Načti data
     await Promise.all([
         loadIngredients(),
-        const envSelect = document.getElementById("environmentSelect");
-        const environments = extractEnvironments(INGREDIENTS);
-        const optAny = document.createElement("option");
-        optAny.value = "any";
-        optAny.textContent = "Libovolné";
-        envSelect.appendChild(optAny);
-
-        for (const env of environments) {
-            const opt = document.createElement("option");
-            opt.value = env;
-            opt.textContent = env;
-            envSelect.appendChild(opt);
-        }
-
         loadTags()
     ]);
 
+    console.log("INGREDIENTS LOADED:", INGREDIENTS.length);
+
+    // 2️⃣ Naplň prostředí
+    const envSelect = document.getElementById("environmentSelect");
+
+    if (!envSelect) {
+        console.error("❌ environmentSelect nenalezen v DOM");
+        return;
+    }
+
+    const environments = extractEnvironments(INGREDIENTS);
+
+    console.log("ENVIRONMENTS:", environments);
+
+    if (environments.length === 0) {
+        console.warn("⚠️ Žádná prostředí nebyla nalezena");
+    }
+
+    // volitelné: any
+    const optAny = document.createElement("option");
+    optAny.value = "any";
+    optAny.textContent = "Libovolné";
+    envSelect.appendChild(optAny);
+
+    for (const env of environments) {
+        const opt = document.createElement("option");
+        opt.value = env;
+        opt.textContent = env;
+        envSelect.appendChild(opt);
+    }
+
+    // 3️⃣ Vykresli tagy
     renderTags();
 
+    // 4️⃣ Form handler
     const form = document.getElementById("generatorForm");
 
     form.addEventListener("submit", e => {
@@ -276,6 +297,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             selectedTags
         );
 
+        console.log("GEN RESULT:", result);
+
         renderResult(result);
     });
 });
+
