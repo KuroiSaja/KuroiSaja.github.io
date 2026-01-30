@@ -4,6 +4,7 @@
 
 let INGREDIENTS = [];
 let TAGS_BY_CATEGORY = {};
+let TAG_ID_TO_NAME = {};
 
 // =========================
 // LOAD DATA
@@ -19,16 +20,23 @@ async function loadTags() {
     const tags = await res.json();
 
     TAGS_BY_CATEGORY = {};
+    TAG_ID_TO_NAME = {};
+
     for (const tag of tags) {
         const cat = tag.tag_category;
+
         if (!TAGS_BY_CATEGORY[cat]) {
             TAGS_BY_CATEGORY[cat] = [];
         }
-        TAGS_BY_CATEGORY[cat].push({
-            id: String(tag.tag_id),
-            name: tag.tag_name
-        });
+
+        const id = String(tag.tag_id);
+        const name = tag.tag_name;
+
+        TAGS_BY_CATEGORY[cat].push({ id, name });
+        TAG_ID_TO_NAME[id] = name; // 👈 KLÍČOVÝ ŘÁDEK
     }
+
+    console.log("TAG MAP:", TAG_ID_TO_NAME);
 }
 
 function buildTagIdMap() {
@@ -134,10 +142,8 @@ function renderResult(result) {
     el.appendChild(ctx);
 
     if (result.inputs.tags && result.inputs.tags.length > 0) {
-        const tagMap = buildTagIdMap();
-    
         const tagNames = result.inputs.tags.map(
-            id => tagMap[id] ?? id
+            id => TAG_ID_TO_NAME[id] ?? id
         );
     
         const tags = document.createElement("p");
