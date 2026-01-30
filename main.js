@@ -10,7 +10,7 @@ let TAGS_BY_CATEGORY = {};
 // =========================
 
 async function loadIngredients() {
-    const res = await fetch(".data/ingredience.json");
+    const res = await fetch("data/ingredience.json");
     INGREDIENTS = await res.json();
 }
 
@@ -29,6 +29,22 @@ async function loadTags() {
             name: tag.tag_name
         });
     }
+}
+
+function extractEnvironments(ingredients) {
+    const set = new Set();
+
+    for (const row of ingredients) {
+        if (!row.environment) continue;
+
+        String(row.environment)
+            .split("|")
+            .map(e => e.trim())
+            .filter(e => e.length > 0 && e.toLowerCase() !== "any")
+            .forEach(e => set.add(e));
+    }
+
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "cs"));
 }
 
 // =========================
@@ -206,23 +222,6 @@ function renderResult(result) {
 // FORM HANDLER
 // =========================
 
-function extractEnvironments(ingredients) {
-    const set = new Set();
-
-    for (const row of ingredients) {
-        if (!row.environment) continue;
-
-        String(row.environment)
-            .split("|")
-            .map(e => e.trim())
-            .filter(e => e.length > 0 && e.toLowerCase() !== "any")
-            .forEach(e => set.add(e));
-    }
-
-    return Array.from(set).sort((a, b) => a.localeCompare(b, "cs"));
-}
-
-
 document.addEventListener("DOMContentLoaded", async () => {
 
     // 1️⃣ Načti data
@@ -233,23 +232,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     console.log("INGREDIENTS LOADED:", INGREDIENTS.length);
 
-    // 2️⃣ Naplň prostředí
+    // 2️⃣ Naplň prostředí do selectu
     const envSelect = document.getElementById("environmentSelect");
 
     if (!envSelect) {
-        console.error("❌ environmentSelect nenalezen v DOM");
+        console.error("❌ environmentSelect nenalezen v HTML");
         return;
     }
 
     const environments = extractEnvironments(INGREDIENTS);
-
     console.log("ENVIRONMENTS:", environments);
 
-    if (environments.length === 0) {
-        console.warn("⚠️ Žádná prostředí nebyla nalezena");
-    }
-
-    // volitelné: any
+    // volitelné: "libovolné"
     const optAny = document.createElement("option");
     optAny.value = "any";
     optAny.textContent = "Libovolné";
@@ -262,10 +256,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         envSelect.appendChild(opt);
     }
 
-    // 3️⃣ Vykresli tagy
+    // 3️⃣ Tagy
     renderTags();
 
-    // 4️⃣ Form handler
+    // 4️⃣ Form submit
     const form = document.getElementById("generatorForm");
 
     form.addEventListener("submit", e => {
@@ -283,7 +277,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const critical = data.get("critical") !== null;
         const criticalFail = data.get("criticalFail") !== null;
-
         const selectedTags = getSelectedTags(form);
 
         const result = generate(
@@ -296,8 +289,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             criticalFail,
             selectedTags
         );
-
-        console.log("GEN RESULT:", result);
 
         renderResult(result);
     });
