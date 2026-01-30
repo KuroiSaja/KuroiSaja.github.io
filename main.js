@@ -10,7 +10,7 @@ let TAGS_BY_CATEGORY = {};
 // =========================
 
 async function loadIngredients() {
-    const res = await fetch("data/ingredience.json");
+    const res = await fetch(".data/ingredience.json");
     INGREDIENTS = await res.json();
 }
 
