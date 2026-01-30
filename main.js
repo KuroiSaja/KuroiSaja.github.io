@@ -325,8 +325,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        const critical = data.get("critical") !== null;
-        const criticalFail = data.get("criticalFail") !== null;
+        const critical = criticalCheckbox.checked;
+        const criticalFail = criticalFailCheckbox.checked;
+        
+        if (critical && criticalFail) {
+            console.warn("Obě kritiky aktivní – UI chyba, opravuji");
+        }
+
         const selectedTags = getSelectedTags(form);
 
         console.log("SELECTED TAG IDS:", selectedTags);
