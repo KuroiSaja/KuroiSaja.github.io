@@ -3,51 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Generátor surovin – Dračí hlídka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>Generátor surovin</h1>
 
-<form id="generatorForm">
+<form id="generatorForm" class="generator-form">
 
-    <label>Environment:
-        <select name="environment" required>
-            <option value="forest">Les</option>
-            <option value="meadow">Louka</option>
-            <option value="mountain">Hory</option>
-        </select>
-    </label>
+    <section class="form-section">
+        <label>
+            Prostředí
+            <select name="environment" required>
+                <option value="forest">Les</option>
+                <option value="meadow">Louka</option>
+                <option value="swamp">Bažina</option>
+                <option value="mountain">Hory</option>
+                <option value="urban">Město</option>
+            </select>
+        </label>
 
-    <label>Roční období:
-        <select name="season" required>
-            <option value="jaro">Jaro</option>
-            <option value="léto">Léto</option>
-            <option value="podzim">Podzim</option>
-            <option value="zima">Zima</option>
-        </select>
-    </label>
+        <label>
+            Roční období
+            <select name="season" required>
+                <option value="jaro">Jaro</option>
+                <option value="léto">Léto</option>
+                <option value="podzim">Podzim</option>
+                <option value="zima">Zima</option>
+            </select>
+        </label>
+    </section>
 
-    <label>Score:
-        <input type="number" name="score" min="1" required>
-    </label>
+    <section class="form-section">
+        <label>
+            Score
+            <input type="number" name="score" min="1" required>
+        </label>
 
-    <label>Hodiny:
-        <input type="number" name="hours" min="1" required>
-    </label>
+        <label>
+            Počet hodin
+            <input type="number" name="hours" min="1" required>
+        </label>
+    </section>
 
-    <label>
-        <input type="checkbox" name="critical"> Kritický úspěch
-    </label>
+    <section class="form-section checkboxes">
+        <label>
+            <input type="checkbox" name="critical">
+            Kritický úspěch
+        </label>
 
-    <label>
-        <input type="checkbox" name="criticalFail"> Kritický neúspěch
-    </label>
+        <label>
+            <input type="checkbox" name="criticalFail">
+            Kritický neúspěch
+        </label>
+    </section>
 
-    <button type="submit">Generovat</button>
+    <section class="tag-section">
+        <h2>Tagy oblasti</h2>
+        <div id="tagContainer"></div>
+    </section>
+
+    <button type="submit" class="primary-btn">
+        Generovat nález
+    </button>
+
 </form>
 
-<div id="result"></div>
+<section id="result" class="result"></section>
 
 <script src="generator.js"></script>
 <script src="main.js"></script>
