@@ -148,12 +148,13 @@ function renderResult(result) {
 
         li.innerHTML = text;
 
-        if (item.usage) {
+        if (item.usage && String(item.usage).trim().length > 0) {
             const usage = document.createElement("div");
             usage.className = "usage";
             usage.textContent = item.usage;
             li.appendChild(usage);
         }
+
 
         ul.appendChild(li);
     }
@@ -188,7 +189,7 @@ function renderResult(result) {
 
         p.innerHTML = text;
 
-        if (result.rare.usage) {
+        if (result.rare.usage && String(result.rare.usage).trim().length > 0) {
             const usage = document.createElement("div");
             usage.className = "usage";
             usage.textContent = result.rare.usage;
