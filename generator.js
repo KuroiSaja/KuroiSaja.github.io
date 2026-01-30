@@ -40,6 +40,20 @@ function splitTags(cell) {
     );
 }
 
+function weightedRandom(items, weights) {
+    const total = weights.reduce((a, b) => a + b, 0);
+    let r = Math.random() * total;
+
+    for (let i = 0; i < items.length; i++) {
+        r -= weights[i];
+        if (r <= 0) {
+            return items[i];
+        }
+    }
+    return items[items.length - 1];
+}
+
+
 // =========================
 // POOL LOGIC
 // =========================
@@ -122,13 +136,84 @@ function buildPool(ingredients, environment, season, selectedTags) {
     return pool;
 }
 
+// =========================
+// PICK LOGIC
+// =========================
+
+function pickFromPool(pool, total, selectedTags) {
+    const results = [];
+    const foundCounts = {};
+    const selectedTagSet = new Set(selectedTags || []);
+
+    // Základní váhy podle rarity
+    const RARITY_WEIGHT = {
+        common: 1.0,
+        uncommon: 0.35,
+        rare: 0.12
+    };
+
+    // Ladicí konstanty
+    const PEAK_STRENGTH = 3.0;
+    const THIRD_MULTIPLIER = 1.2;
+    const DECAY_RATE = 0.7;
+    const SPECIFIC_BOOST = 1.6;
+
+    for (let i = 0; i < total; i++) {
+        const weights = [];
+
+        for (const row of pool) {
+            const name = row.name;
+            const rarity = row.rarity;
+
+            // 1️⃣ base váha podle rarity
+            const base = RARITY_WEIGHT[rarity] ?? 0.1;
+            let weight = base;
+
+            // 2️⃣ specific tag boost (nejdřív!)
+            const specificTags = splitTags(row["specific tag"]);
+            for (const tag of specificTags) {
+                if (selectedTagSet.has(tag)) {
+                    weight *= SPECIFIC_BOOST;
+                    break;
+                }
+            }
+
+            // 3️⃣ opakování
+            const count = foundCounts[name] || 0;
+
+            if (count === 1) {
+                // 2. nález – silný peak
+                weight *= (1 + PEAK_STRENGTH * base);
+            } else if (count === 2) {
+                // 3. nález – stále bohaté místo
+                weight *= THIRD_MULTIPLIER;
+            } else if (count >= 3) {
+                // útlum od 4.
+                weight *= 1.0 / (1 + (count - 2) * DECAY_RATE);
+            }
+
+            weights.push(weight);
+        }
+
+        // vážený výběr
+        const chosen = weightedRandom(pool, weights);
+        results.push(chosen);
+
+        foundCounts[chosen.name] = (foundCounts[chosen.name] || 0) + 1;
+    }
+
+    return results;
+}
+
+
 //dočasný test
+const testPool = [
+    { name: "A", rarity: "common", "specific tag": "" },
+    { name: "B", rarity: "uncommon", "specific tag": "magic" },
+    { name: "C", rarity: "rare", "specific tag": "" }
+];
 
 console.log(
-  buildPool(
-    ingredients,
-    "forest",
-    "jaro",
-    ["herb"]
-  )
+    pickFromPool(testPool, 10, ["magic"])
 );
+
