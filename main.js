@@ -206,9 +206,40 @@ function renderResult(result) {
 // FORM HANDLER
 // =========================
 
+function extractEnvironments(ingredients) {
+    const set = new Set();
+
+    for (const row of ingredients) {
+        if (!row.environment) continue;
+
+        String(row.environment)
+            .split("|")
+            .map(e => e.trim())
+            .filter(e => e.length > 0 && e.toLowerCase() !== "any")
+            .forEach(e => set.add(e));
+    }
+
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "cs"));
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     await Promise.all([
         loadIngredients(),
+        const envSelect = document.getElementById("environmentSelect");
+        const environments = extractEnvironments(INGREDIENTS);
+        const optAny = document.createElement("option");
+        optAny.value = "any";
+        optAny.textContent = "Libovolné";
+        envSelect.appendChild(optAny);
+
+        for (const env of environments) {
+            const opt = document.createElement("option");
+            opt.value = env;
+            opt.textContent = env;
+            envSelect.appendChild(opt);
+        }
+
         loadTags()
     ]);
 
