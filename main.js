@@ -254,22 +254,6 @@ function renderResult(result) {
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const envSelect = document.getElementById("environmentSelect");
-
-    new MutationObserver(mutations => {
-        mutations.forEach(m => {
-            m.addedNodes.forEach(node => {
-                if (
-                    node.nodeName === "OPTION" &&
-                    node.textContent.toLowerCase().includes("libovol")
-                ) {
-                    console.trace("LIBOVOLNÉ PŘIDÁNO ODTUD");
-                }
-            });
-        });
-    }).observe(envSelect, { childList: true });
-
-
     // 1️⃣ Načti data
     await Promise.all([
         loadIngredients(),
