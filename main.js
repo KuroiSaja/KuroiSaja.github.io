@@ -291,6 +291,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 4️⃣ Form submit
     const form = document.getElementById("generatorForm");
+    
+    // =========================
+    // KRITICKÝ ÚSPĚCH / NEÚSPĚCH – vzájemné vyloučení
+    // =========================
+    
+    const criticalCheckbox = form.querySelector('input[name="critical"]');
+    const criticalFailCheckbox = form.querySelector('input[name="criticalFail"]');
+    
+    criticalCheckbox.addEventListener("change", () => {
+        if (criticalCheckbox.checked) {
+            criticalFailCheckbox.checked = false;
+        }
+    });
+    
+    criticalFailCheckbox.addEventListener("change", () => {
+        if (criticalFailCheckbox.checked) {
+            criticalCheckbox.checked = false;
+        }
+    });
+
 
     form.addEventListener("submit", e => {
         e.preventDefault();
