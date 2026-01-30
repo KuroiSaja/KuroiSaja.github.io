@@ -1,0 +1,114 @@
+/* =========================
+   GENERATOR FORM
+   ========================= */
+
+.generator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.form-section label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    gap: 0.25rem;
+}
+
+.form-section input,
+.form-section select {
+    padding: 6px 8px;
+    font-size: 1rem;
+}
+
+.checkboxes {
+    gap: 2rem;
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.primary-btn {
+    margin-top: 1rem;
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: #1f2d3a;
+}
+
+/* =========================
+   TAGS
+   ========================= */
+
+.tag-section h2 {
+    margin-bottom: 0.5rem;
+}
+
+.tag-category {
+    background: #fafafa;
+}
+
+.tag-grid {
+    display: grid;
+    gap: 0.3rem 0.6rem;
+}
+
+.tag-item input {
+    margin-top: 2px;
+}
+
+/* =========================
+   RESULT
+   ========================= */
+
+.result {
+    margin-top: 2rem;
+}
+
+.result ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.result li {
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+}
+
+/* =========================
+   RARITY COLORS
+   ========================= */
+
+.result li[data-rarity="common"] {
+    background: #e8f5e9;
+}
+
+.result li[data-rarity="uncommon"] {
+    background: #e3f2fd;
+}
+
+.result li[data-rarity="rare"] {
+    background: #fce4ec;
+    font-weight: bold;
+}
+
+.result .critical {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: #fff3cd;
+    border-radius: 10px;
+    border-left: 5px solid #f1c40f;
+}
