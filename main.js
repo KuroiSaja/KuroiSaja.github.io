@@ -137,6 +137,8 @@ function renderResult(result) {
 
         let text = `<strong>${name}</strong> × ${item.count}`;
 
+        console.log("USAGE TEST:", item.usage);
+
         const details = [];
         if (item.mana) details.push(`mana: ${item.mana}`);
         if (item.suroviny) details.push(`suroviny: ${item.suroviny}`);
