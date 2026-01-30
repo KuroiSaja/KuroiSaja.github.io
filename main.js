@@ -271,14 +271,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const environments = extractEnvironments(INGREDIENTS);
-    console.log("ENVIRONMENTS:", environments);
-
+    
+    // 🔥 ABSOLUTNÍ RESET – smaže cokoliv, co tam bylo
+    envSelect.innerHTML = "";
+    
     for (const env of environments) {
+    
+        // 🔒 POJISTKA – nikdy nepustí any / Libovolné
+        if (!env || env.toLowerCase() === "any" || env.toLowerCase() === "libovolné") {
+            continue;
+        }
+    
         const opt = document.createElement("option");
         opt.value = env;
         opt.textContent = env;
         envSelect.appendChild(opt);
     }
+
 
     // 3️⃣ Tagy
     renderTags();
