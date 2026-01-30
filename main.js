@@ -19,6 +19,8 @@ async function loadTags() {
     const res = await fetch("data/tags.json");
     const tags = await res.json();
 
+    console.log("LOAD TAGS CALLED");
+
     TAGS_BY_CATEGORY = {};
     TAG_ID_TO_NAME = {};
 
@@ -36,7 +38,7 @@ async function loadTags() {
         TAG_ID_TO_NAME[id] = name; // 👈 KLÍČOVÝ ŘÁDEK
     }
 
-    console.log("TAG MAP:", TAG_ID_TO_NAME);
+    console.log("TAG_ID_TO_NAME AFTER LOAD:", TAG_ID_TO_NAME);
 }
 
 function buildTagIdMap() {
@@ -118,10 +120,13 @@ function getSelectedTags(form) {
 // RESULT RENDERING
 // =========================
 
-function renderResult(result) {
+function renderResult(result) {    
     const el = document.getElementById("result");
     el.innerHTML = "";
 
+    console.log("RENDER TAG MAP:", TAG_ID_TO_NAME);
+    console.log("RENDER INPUT TAGS:", result.inputs.tags);
+    
     if (!result) return;
 
     /* =========================
