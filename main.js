@@ -261,6 +261,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     ]);
 
     console.log("INGREDIENTS LOADED:", INGREDIENTS.length);
+    console.log("MAIN.JS VERSION:", "2026-02-01-A");
+
 
     // 2️⃣ Naplň prostředí do selectu
     const envSelect = document.getElementById("environmentSelect");
