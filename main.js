@@ -246,6 +246,15 @@ function renderResult(result) {
 
         el.appendChild(p);
     }
+
+    // =========================
+    // AUTO SCROLL K VÝSLEDKU
+    // =========================
+    
+    el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 // =========================
