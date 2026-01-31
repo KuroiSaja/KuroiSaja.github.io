@@ -249,12 +249,12 @@ function generate(ingredients, environment, season, score, hours, critical, crit
 
     // ---- kritický úspěch ----
     if (critical) {
-        const uncommon = ingredients.filter(r => r.rarity === "uncommon");
-        const rare = ingredients.filter(r => r.rarity === "rare");
-
+        const uncommon = ingredients.filter(i => i.rarity === "uncommon");
+        const rare = ingredients.filter(i => i.rarity === "rare");
+    
         const choices = [];
         const weights = [];
-
+    
         // UNCOMMON
         if (uncommon.length > 0) {
             const r = uncommon[Math.floor(Math.random() * uncommon.length)];
@@ -269,7 +269,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             });
             weights.push(1.0);
         }
-
+    
         // RARE (nižší váha)
         if (rare.length > 0) {
             const r = rare[Math.floor(Math.random() * rare.length)];
@@ -284,33 +284,37 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             });
             weights.push(0.25);
         }
-
+    
         // ABSTRAKTNÍ MAGICKÝ NÁLEZ (MANA)
         const manaMin = Math.max((score - 10) * 5, 5);
         const manaMax = Math.max((score - 5) * 5, manaMin);
-
+    
         choices.push({
             name: "Abstraktní magický nález",
             count: null,
+            type: null,
             mana: randomInt(manaMin, manaMax),
+            suroviny: 0,
             usage: "Volně využitelná magická energie",
             rarity: "abstract"
         });
         weights.push(1.0);
-
+    
         // ABSTRAKTNÍ NÁLEZ SUROVIN
         const surovinyMin = Math.max((score - 10) * 10, 10);
         const surovinyMax = Math.max((score - 5) * 10, surovinyMin);
-
+    
         choices.push({
             name: "Abstraktní nález surovin",
             count: null,
+            type: null,
+            mana: 0,
             suroviny: randomInt(surovinyMin, surovinyMax),
             usage: "Volně využitelné alchymistické suroviny",
             rarity: "abstract"
         });
         weights.push(1.0);
-
+    
         result.rare = weightedRandom(choices, weights);
     }
 
