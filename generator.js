@@ -261,7 +261,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
-                type: row.type ?? null,
+                type: r.type ?? null
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
@@ -276,7 +276,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
-                type: row.type ?? null,
+                type: r.type ?? null
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
