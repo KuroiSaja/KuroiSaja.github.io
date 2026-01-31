@@ -236,13 +236,14 @@ function generate(ingredients, environment, season, score, hours, critical, crit
         if (!result.ingredients[name]) {
             result.ingredients[name] = {
                 count: 0,
-                type: row.type, 
+                type: row.type ?? null,   // 👈 TADY JE KLÍČ
                 mana: safeInt(row.mana),
                 suroviny: safeInt(row.suroviny),
                 usage: row.usage,
                 rarity: row.rarity
             };
         }
+
         result.ingredients[name].count++;
     }
 
@@ -260,7 +261,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
-                type: row.type, 
+                type: row.type ?? null,
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
@@ -275,7 +276,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
-                type: row.type, 
+                type: row.type ?? null,
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
@@ -293,7 +294,6 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             count: null,
             mana: randomInt(manaMin, manaMax),
             usage: "Volně využitelná magická energie",
-            rarity: "abstract"
         });
         weights.push(1.0);
 
@@ -306,7 +306,6 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             count: null,
             suroviny: randomInt(surovinyMin, surovinyMax),
             usage: "Volně využitelné alchymistické suroviny",
-            rarity: "abstract"
         });
         weights.push(1.0);
 
