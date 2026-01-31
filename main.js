@@ -186,6 +186,7 @@ function renderResult(result) {
         console.log("USAGE TEST:", item.usage);
 
         const details = [];
+        if (item.type) details.push(`typ: ${item.type}`);
         if (item.mana) details.push(`mana: ${item.mana}`);
         if (item.suroviny) details.push(`suroviny: ${item.suroviny}`);
         if (item.rarity) details.push(`rarita: ${item.rarity}`);
