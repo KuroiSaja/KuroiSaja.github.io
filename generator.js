@@ -236,6 +236,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
         if (!result.ingredients[name]) {
             result.ingredients[name] = {
                 count: 0,
+                type: row.type, 
                 mana: safeInt(row.mana),
                 suroviny: safeInt(row.suroviny),
                 usage: row.usage,
@@ -259,6 +260,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
+                type: row.type, 
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
@@ -273,6 +275,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             choices.push({
                 name: r.name,
                 count: 1,
+                type: row.type, 
                 mana: safeInt(r.mana),
                 suroviny: safeInt(r.suroviny),
                 usage: r.usage,
