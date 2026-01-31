@@ -294,6 +294,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             count: null,
             mana: randomInt(manaMin, manaMax),
             usage: "Volně využitelná magická energie",
+            rarity: "abstract"
         });
         weights.push(1.0);
 
@@ -306,6 +307,7 @@ function generate(ingredients, environment, season, score, hours, critical, crit
             count: null,
             suroviny: randomInt(surovinyMin, surovinyMax),
             usage: "Volně využitelné alchymistické suroviny",
+            rarity: "abstract"
         });
         weights.push(1.0);
 
