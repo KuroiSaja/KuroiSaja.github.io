@@ -215,6 +215,9 @@ function renderResult(result) {
        ========================= */
 
     if (result.rare) {
+        console.log("CRITICAL RAW OBJECT:", result.rare);
+        console.log("CRITICAL TYPE:", result.rare.type);
+
         const hr = document.createElement("hr");
         el.appendChild(hr);
 
