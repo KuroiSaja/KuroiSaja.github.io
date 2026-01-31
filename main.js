@@ -228,6 +228,7 @@ function renderResult(result) {
         let text = `<strong>${result.rare.name}</strong>`;
 
         const critDetails = [];
+        if (result.rare.type) critDetails.push(`typ: ${result.rare.type}`); 
         if (result.rare.mana) critDetails.push(`mana: ${result.rare.mana}`);
         if (result.rare.suroviny) critDetails.push(`suroviny: ${result.rare.suroviny}`);
         if (result.rare.rarity) critDetails.push(`rarita: ${result.rare.rarity}`);
